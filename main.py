@@ -19,6 +19,11 @@ def health():
     return {"status": "live", "version": get_version()}
 
 
+@app.get("/ping")
+def ping():
+    return {"message": "MarketPulse SAAS is live!"}
+
+
 if __name__ == "__main__":
     import uvicorn
 
