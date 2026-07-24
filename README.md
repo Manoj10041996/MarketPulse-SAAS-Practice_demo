@@ -1,4 +1,4 @@
-1# MarketPulse SAAS Practice Demo
+# MarketPulse SAAS Practice Demo
 
 ## Requirements
 
@@ -42,7 +42,21 @@ curl http://127.0.0.1:8000/health
 Returns:
 
 ```json
-{"status": "live", "version": "0.1.0"}
+{"status": "live", "version": "2.0.0"}
+```
+
+## Ping
+
+A simple static endpoint to quickly verify the app is up:
+
+```bash
+curl http://127.0.0.1:8000/ping
+```
+
+Returns:
+
+```json
+{"message": "MarketPulse SAAS is live!"}
 ```
 
 ## Dependencies
