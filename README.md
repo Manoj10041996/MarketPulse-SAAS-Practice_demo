@@ -28,7 +28,21 @@ cmd.exe:
 ## Running
 
 ```bash
-uv run main.py
+uv run uvicorn main:app --reload
+```
+
+## Health Check
+
+Once running, check that the app is live and see its version:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+Returns:
+
+```json
+{"status": "live", "version": "0.1.0"}
 ```
 
 ## Dependencies
