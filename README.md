@@ -1,77 +1,46 @@
-# MarketPulse SAAS Practice Demo
+# MarketPulse
+
+An AI agent that scrapes Amazon via Oxylabs and exposes the data to
+customers through an authenticated API.
+
+See [`CLAUDE.md`](CLAUDE.md) for the full product summary, tech stack,
+folder layout, and golden rules.
 
 ## Requirements
 
-- Python >= 3.12
-- [uv](https://docs.astral.sh/uv/) package manager
+- Python >= 3.12 and [uv](https://docs.astral.sh/uv/)
+- Node.js and npm
 
-## Setup
-
-Create and activate the virtual environment:
+## Backend
 
 ```bash
-uv venv
+cd backend
+uv sync
+uv run uvicorn app.main:app --reload
 ```
 
-PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-cmd.exe:
-
-```cmd
-.venv\Scripts\activate.bat
-```
-
-## Running
-
-```bash
-uv run uvicorn main:app --reload
-```
-
-## Health Check
-
-Once running, check that the app is live and see its version:
+Runs on `http://127.0.0.1:8000`.
 
 ```bash
 curl http://127.0.0.1:8000/health
 ```
 
-Returns:
-
 ```json
-{"status": "live", "version": "2.0.0"}
+{"status": "ok"}
 ```
 
-## Ping
-
-A simple static endpoint to quickly verify the app is up:
+## Frontend
 
 ```bash
-curl http://127.0.0.1:8000/ping
+cd frontend
+npm install
+npm run dev
 ```
 
-Returns:
+## Environment Variables
 
-```json
-{"message": "MarketPulse SAAS is live!"}
-```
-
-## Dependencies
-
-Add a new dependency:
-
-```bash
-uv add <package>
-```
-
-Sync dependencies from the lockfile:
-
-```bash
-uv sync
-```
+Copy `.env.example` to `.env` and fill in real values — see that file for
+the full list (OpenAI, Oxylabs, Supabase, Postgres, JWT).
 
 ## Author
 
