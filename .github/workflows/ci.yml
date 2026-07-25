@@ -11,6 +11,9 @@ jobs:
   # /health endpoint actually responds.
   checks:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,11 +30,11 @@ jobs:
         run: uv sync --locked
 
       - name: Verify app imports
-        run: uv run python -c "import main"
+        run: uv run python -c "import app.main"
 
       - name: Smoke test /health endpoint
         run: |
-          uv run uvicorn main:app --port 8000 &
+          uv run uvicorn app.main:app --port 8000 &
           for i in $(seq 1 10); do
             curl -sf http://127.0.0.1:8000/health && break
             sleep 1

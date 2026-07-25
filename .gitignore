@@ -1,5 +1,17 @@
+# Environment
 .env
+
+# Python
 .venv/
 __pycache__/
 *.pyc
-*.json
+
+# Node
+node_modules/
+
+# Frontend build output
+frontend/dist/
+
+# GCP service account keys — never commit real credentials
+marketpulse-saas-503410-*.json
+*-service-account*.json

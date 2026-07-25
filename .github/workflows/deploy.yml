@@ -48,7 +48,7 @@ jobs:
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
       - name: Build Docker image
-        run: docker build -t ${{ env.IMAGE }}:${{ github.event.workflow_run.head_sha }} -t ${{ env.IMAGE }}:latest .
+        run: docker build -t ${{ env.IMAGE }}:${{ github.event.workflow_run.head_sha }} -t ${{ env.IMAGE }}:latest ./backend
 
       - name: Push Docker image to Artifact Registry
         run: |

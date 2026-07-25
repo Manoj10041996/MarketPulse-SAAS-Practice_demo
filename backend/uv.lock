@@ -125,8 +125,8 @@ wheels = [
 ]
 
 [[package]]
-name = "market-pulse-saas-project"
-version = "2.0.0"
+name = "marketpulse-backend"
+version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
