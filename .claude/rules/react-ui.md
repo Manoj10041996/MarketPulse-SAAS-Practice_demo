@@ -1,3 +1,8 @@
+---
+paths:
+  - "frontend/**/*.{ts,tsx}"
+---
+
 # React / UI Rules
 
 - Function components with hooks only. No class components.

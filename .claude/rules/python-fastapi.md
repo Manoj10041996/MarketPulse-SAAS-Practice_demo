@@ -1,3 +1,8 @@
+---
+paths:
+  - "backend/**/*.py"
+---
+
 # Python / FastAPI Rules
 
 - Type-hint everything. Every function signature (params and return type) is typed; no bare `dict`/`list` where a Pydantic model or dataclass fits better.
