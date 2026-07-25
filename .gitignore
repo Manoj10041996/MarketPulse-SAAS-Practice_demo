@@ -1,6 +1,9 @@
 # Environment
 .env
 
+# Personal, per-developer instructions — not shared with the team
+CLAUDE.local.md
+
 # Python
 .venv/
 __pycache__/
