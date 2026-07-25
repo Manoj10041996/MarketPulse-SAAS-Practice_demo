@@ -37,6 +37,18 @@ npm install
 npm run dev
 ```
 
+## Live Deployment
+
+Backend is deployed on Google Cloud Run: **https://marketpulse-saas-33726424306.us-central1.run.app**
+
+```bash
+curl https://marketpulse-saas-33726424306.us-central1.run.app/health
+```
+
+| Endpoint | Description |
+|---|---|
+| `GET /health` | Liveness check — returns `{"status": "ok"}` |
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` and fill in real values — see that file for

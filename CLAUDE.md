@@ -45,6 +45,16 @@ npm install
 npm run dev
 ```
 
+## Deployed Backend
+
+Live on Google Cloud Run: **https://marketpulse-saas-33726424306.us-central1.run.app**
+
+| Endpoint | Description |
+|---|---|
+| `GET /health` | Liveness check — returns `{"status": "ok"}` |
+
+Every push to `main` redeploys this service automatically (see `.github/workflows/deploy.yml`).
+
 ## Golden Rules
 
 - **Typed Python**: every function has type hints; Pydantic models for all API input/output.
