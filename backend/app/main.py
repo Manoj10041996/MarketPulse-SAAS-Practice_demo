@@ -9,7 +9,8 @@ from app.clients.oxylabs import OxylabsAPIError, get_oxylabs_client
 from app.config import get_settings
 from app.core.exceptions import AgentUnavailableError
 from app.core.rate_limit import register_rate_limiting
-from app.routers import analysis, health
+from app.db.session import get_engine, init_db
+from app.routers import analysis, auth, health
 
 logger = logging.getLogger(__name__)
 
@@ -20,10 +21,17 @@ async def lifespan(_app: FastAPI):
     # startup, so a misconfigured deploy crash-loops visibly instead of
     # 500ing on a customer's first request. Also eagerly builds the
     # singleton client/agent to avoid first-request cold-start latency.
-    get_settings()
+    settings = get_settings()
+    if settings.database_url.startswith("sqlite"):
+        # Dev/local convenience only. Once a real Postgres URL is
+        # configured, supabase/migrations/*.sql is the schema source of
+        # truth, applied through Supabase's own tooling — never auto-DDL'd
+        # by the app.
+        await init_db()
     get_oxylabs_client()
     get_amazon_analysis_agent()
     yield
+    await get_engine().dispose()
 
 
 app = FastAPI(title="MarketPulse", lifespan=lifespan)
@@ -31,6 +39,7 @@ app = FastAPI(title="MarketPulse", lifespan=lifespan)
 register_rate_limiting(app)
 
 app.include_router(health.router)
+app.include_router(auth.router)
 app.include_router(analysis.router)
 
 

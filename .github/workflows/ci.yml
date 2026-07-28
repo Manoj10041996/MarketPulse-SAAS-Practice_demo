@@ -14,6 +14,15 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    # Harmless placeholders, not real secrets — just enough for Settings'
+    # fail-fast validation to pass so the app can boot for the smoke test
+    # below. /health never touches Oxylabs/Anthropic/Tavily, so no real
+    # credentials are needed here.
+    env:
+      ANTHROPIC_API_KEY: ci-placeholder
+      TAVILY_API_KEY: ci-placeholder
+      OXYLABS_USERNAME: ci-placeholder
+      OXYLABS_PASSWORD: ci-placeholder
     steps:
       - name: Checkout
         uses: actions/checkout@v4

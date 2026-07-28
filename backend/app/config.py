@@ -1,6 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # .env lives at the repo root, not inside backend/ — resolve it relative to
@@ -26,6 +27,15 @@ class Settings(BaseSettings):
     default_marketplace_domain: str = "com"
 
     analysis_rate_limit: str = "10/minute"
+
+    # Defaults to a local SQLite file — zero setup for local dev. Once
+    # Supabase/Postgres is provisioned, set POSTGRES_URI (already reserved
+    # in .env.example) to a real postgresql+asyncpg://... URL; `asyncpg`
+    # will need to be added as a dependency at that point (uv add asyncpg).
+    database_url: str = Field(
+        default="sqlite+aiosqlite:///./marketpulse.db",
+        validation_alias=AliasChoices("DATABASE_URL", "POSTGRES_URI"),
+    )
 
 
 @lru_cache(maxsize=1)

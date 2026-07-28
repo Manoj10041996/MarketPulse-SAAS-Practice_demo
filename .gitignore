@@ -9,6 +9,10 @@ CLAUDE.local.md
 __pycache__/
 *.pyc
 
+# Local dev database (sqlite default for backend/app/db)
+backend/marketpulse.db
+backend/marketpulse.db-journal
+
 # Node
 node_modules/
 

@@ -1,10 +1,25 @@
 from unittest.mock import AsyncMock
 
+import pytest
+
 from app.agents.amazon_analysis_agent import get_amazon_analysis_agent
 from app.clients.oxylabs import OxylabsAPIError
+from app.core.auth import get_current_api_key
 from app.core.exceptions import AgentUnavailableError
 from app.main import app
+from app.models.api_key import ApiKey
 from app.schemas.analysis import AgentAnalysisResult, ComparedProduct
+
+
+@pytest.fixture(autouse=True)
+def _bypass_auth():
+    """These tests are about agent/Oxylabs behavior, not auth — auth itself
+    is covered separately in test_analysis_auth.py."""
+    app.dependency_overrides[get_current_api_key] = lambda: ApiKey(
+        owner_label="test", hashed_key="test"
+    )
+    yield
+    app.dependency_overrides.pop(get_current_api_key, None)
 
 
 def _override_agent(structured=None, side_effect=None):
