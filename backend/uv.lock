@@ -844,6 +844,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "aiosqlite" },
+    { name = "anthropic" },
     { name = "fastapi" },
     { name = "httpx" },
     { name = "langchain" },
@@ -865,6 +866,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiosqlite", specifier = ">=0.22.1" },
+    { name = "anthropic", specifier = ">=0.120.0" },
     { name = "fastapi", specifier = ">=0.139.2" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "langchain", specifier = ">=1.3.14" },

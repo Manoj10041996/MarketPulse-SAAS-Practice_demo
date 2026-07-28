@@ -10,7 +10,7 @@ from app.config import get_settings
 from app.core.exceptions import AgentUnavailableError
 from app.core.rate_limit import register_rate_limiting
 from app.db.session import get_engine, init_db
-from app.routers import analysis, auth, health
+from app.routers import analysis, auth, diagnostics, health
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +41,7 @@ register_rate_limiting(app)
 app.include_router(health.router)
 app.include_router(auth.router)
 app.include_router(analysis.router)
+app.include_router(diagnostics.router)
 
 
 @app.exception_handler(OxylabsAPIError)
